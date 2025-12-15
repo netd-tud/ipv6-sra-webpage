@@ -1,90 +1,114 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
+<section class="intro">
+    <h1>Scanning the IPv6 Internet using Subnet-Router Anycast Probing</h1>
+    <p>
+        We propose a commonly unused method to probe the IPv6 address space. Instead of random probing, we probe the Subnet-Router anycast address of a subnet.
+        Subnet-Router anycast addresses are defined in <a href="https://doi.org/10.17487/RFC1884">RFC 1884</a>.
+        By probing the SRA address of a subnet, we significantly lower the impact of ICMP error message rate limiting, as probing these addresses can trigger ICMP Echo replies.
+        This webpage presents our most recent results from our regular scans.
+        We provide a list of the found router IPv6 addresses as well as information on current routing loop deployment and ICMP time exceeded amplification in IPv6.
+    </p>
+</section>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="scans, ipv6, sra, subnet-router anycast, topology, router, measurements">
-    <meta name="author" content="">
-
-    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='assets/css/fontawesome.all.min.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet" />
-
-   
+<section class="tiles">
+    <div class="tile-row tile-row-two first-row">
+        <div class="tile metric-tile metric-hitlist">
+            <div class="metric-hitlist-info">
+                <h2 class="metric-value" data-target="{{ metrics.router_ips }}">{{ metrics.router_ips|si }}</h2>
+                <p>Observed Router IPv6 Addresses with Subnet-Router Anycast Probing</p>
+            </div>
+            <div class="hitlist-action-group">
+                <a class="hitlist-download" href="{{ url_for('static', filename='data/router-hitlist.csv.zst') }}" download>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3v11m0 0l-4-4m4 4l4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 15v4h14v-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    SRA Router IP Addresses
+                </a>
+            </div>
+        </div>
+        <div class="tile overlap-tile">
+            <div class="overlap-circle">
+                <svg viewBox="0 0 120 120">
+                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
+                    <text x="60" y="55" text-anchor="middle">
+                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
+                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
+                    </text>
+                </svg>
+            </div>
+            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+        </div>
+    </div>
     
-    <title>IPv6 Subnet-Router Anycast (SRA) Probing</title>
-</head>
-
-<body class="d-flex bg-light">
-    <div class="container p-3 mx-auto">
-        <div class="row">
-    <header>
-        <div>
-            <h1 class="logo display-6 float-md-start mb-0">SecNow!</h1>
-          
-            <h2 class="display-6 mb-0 float-right">IPv6 Subnet-Router Anycast (SRA) Probing</h2>
-          
+    <div class="tile tile-plot-group">
+        <h2>Routing Loops and Amplification in IPv6</h2>
+        <div class="plot-row">
+            <figure>
+                <img src="{{ url_for('static', filename='data/figures/looping-subnets-per-router-rank.png') }}" alt="Looping subnets per router rank plot">
+                <figcaption>Number of /48 subnets per router IP address that trigger a routing loop.</figcaption>
+            </figure>
+            <figure>
+                <img src="{{ url_for('static', filename='data/figures/amplification-routingloops.png') }}" alt="Amplification vs routing loops plot">
+                <figcaption>Maximum amplification per router IP address.</figcaption>
+            </figure>
         </div>
-    </header>
-</div>
-
-<main id="Note" class="row row-cols-sm-1 px-3 mb-3 mt-5">
-    <div class="box h-100 w-100">
-        <div class="box-title">News</div>
-        <div class="row px-3 mb-3 align-items-stretch">
-            <div class="col-sm-12">
-                <p class="fs-4 font-monospace text-justify">
-                <b>2025-12-10:</b> Released webpage with measurement results.
-                <br/>
-                <b>2025-09-12:</b> Paper accepted at ACM CoNEXT'25.
-                </p>
+        <div class="plot-metric-grid">
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
+                <p>/48 Subnets that trigger Routing Loops</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
+                <p>/48 Subnets that trigger Amplification</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.max_amplification }}">{{ metrics.max_amplification|si }}</h3>
+                <p>Maximum Observed Amplification Factor</p>
+            </div>
+        </div>
+        <div class="as-checker">
+            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
+                <label for="asn-input">Your AS Number:</label>
+                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
+                <button type="submit" class="as-checker-submit">Check if your network is affected</button>
+            </form>
+            <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">
+                {% if as_result %}
+                    {{ as_result.message }}
+                {% endif %}
             </div>
         </div>
     </div>
-</main>
-
-<main id="Home" class="row row-cols-sm-1 px-3 mb-3 mt-5">
-    <div class="box h-100 w-100">
-        <div class="box-title">Synopsis</div>
-        <div class="row row-cols-lg-1 row-cols-xl-2 px-3 mb-3 align-items-stretch">
-            <div class="col-sm-12">
-                            <p class="fs-3 text-justify">
-                                We revisit the <u class="primary">open DNS (ODNS) infrastructure</u> and, for the first time, systematically measure and analyze  <u class="success">transparent forwarders</u>, DNS components that <u class="danger">transparently relay</u> between stub resolvers and recursive resolvers. We introduce <u class="success">DNSRoute++</u>, a new traceroute approach that leverages the behaviour of transparent forwarders and explores interconnectivity in the ODNS.
-                                
-                            </p>
-                <div id="goto-reports">
-                    <a href="/data" class="text-decoration-none link-dark">
-                        <hr>
-                        <p class="text-center">
-                            <strong class="fs-2">
-                                           Key findings include that transparent forwarders contribute significantly to the current ODNS infrastructure, missed by common scanning campaigns; and that many transparent forwarders relay to a few selected public resolvers such as Google and Cloudflare, which confirms a consolidation trend of DNS stakeholders. Full access to data will follow soon. <!--<u class="primary">assurance profiles here</u>-->
-
-                            </strong>
-                        </p>
-                        <hr>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <a href="{{ url_for('static', filename='/assets/static/khnsw-siius-25.pdf') }}"><img src="{{ url_for('static', filename='assets/img/paper-thumbnail.png') }}" class="w-100"></a>
-            </div>
-        </div>
+    <div class="tile tile-plot-full">
+        <h2>World Map of IPv6 Router IP Addresses found with SRA Probing</h2>
+        <img src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.png') }}" alt="World map of SRA IPv6 addresses">
     </div>
-</main>
+    <div class="tile tile-plot-full">
+        <h2>Comparison of Network Types across multiple IPv6 Address Data Sources</h2>
+        <img src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.png') }}" alt="World map of SRA IPv6 addresses">
+    </div>
+    <div class="tile tile-reference">
+        <h2>If you are using our data, please cite us using the following reference:</h2>
+        {% for ref in references %}
+        <div class="reference-entry">
+            <pre><code>{{ ref }}</code></pre>
+            <button class="copy-reference">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="3" y="7" width="13" height="14" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Copy
+            </button>
+        </div>
+        {% else %}
+        <p>No references available.</p>
+        {% endfor %}
+    </div>
+</section>
 
-    <footer class="text-center mt-5 p-3 border-top">
-            <p>
-                <a href="https://tu-dresden.de/impressum">Legacy Notice</a> |
-                <a href="https://tu-dresden.de/impressum#ck_datenschutz">Privacy</a> |
-                <a href="https://tu-dresden.de/barrierefreiheit">Accessibility</a>
-            </p>
-        </footer>
-    <script src="{{ url_for('static', filename='/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-</body>
-
-</html>
-
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+    <h1>CoNEXT'25 Paper Artifacts</h1>
+    <p>
+        Below are all repositories linked to (i) reproduce the results of our paper "Scanning the IPv6 Internet Using Subnet-Router Anycast Probing" and (ii) run your own SRA measurements.
+    </p>
+</section>
+
+<section class="artifact-grid">
+    <article class="artifact-tile">
+        <div class="artifact-icon-row">
+            <div class="artifact-icon" aria-hidden="true">
+                <img src="{{ url_for('static', filename='img/artifact-icon.png') }}" alt="">
+            </div>
+            <div class="artifact-badge-panel">
+                <img src="{{ url_for('static', filename='img/artifacts_available_v1_1.png') }}" alt="Artifacts Available badge">
+                <img src="{{ url_for('static', filename='img/artifacts_evaluated_functional_v1_1.png') }}" alt="Artifacts Evaluated Functional badge">
+                <img src="{{ url_for('static', filename='img/artifacts_evaluated_results_reproduced_v1_1.png') }}" alt="Artifacts Evaluated Results Reproduced badge">
+            </div>
+        </div>
+        <h2>Paper Artifacts</h2>
+        <p>
+            <strong>Repository:</strong> <a href="https://github.com/netd-tud/artifacts-ipv6-sra-scanning" target="_blank" rel="noopener">
+            netd-tud/artifacts-ipv6-sra-scanning</a>
+        </p>
+        <p>
+            This repository contains the artifacts to reproduce plots and tables, and includes the tools to run your own IPv6 SRA measurements.
+        </p>
+    </article>
+
+    <article class="artifact-tile">
+        <div class="artifact-icon" aria-hidden="true">
+            <img src="{{ url_for('static', filename='img/data-icon.png') }}" alt="">
+        </div>
+        <h2>Artifact Data (OPARA)</h2>
+        <p>
+            <strong>Dataset:</strong> <a href="https://doi.org/10.25532/OPARA-979" target="_blank" rel="noopener">
+            doi.org/10.25532/OPARA-979</a>
+        </p>
+        <p>
+            This dataset is part of the artifact collection and contains all the necessary dataframes to reproduce paper and tables of our paper.
+        </p>
+    </article>
+
+    <article class="artifact-tile">
+        <div class="artifact-icon" aria-hidden="true">
+            <img src="{{ url_for('static', filename='img/go-icon.png') }}" alt="">
+        </div>
+        <h2>IPv6 Address Generator</h2>
+        <p>
+            <strong>Repository:</strong> <a href="https://github.com/mkoch-tud/go_ipv6_address_generator" target="_blank" rel="noopener">
+            mkoch-tud/go_ipv6_address_generator</a>
+        </p>
+        <p>
+            Fast Go-based address generator.
+            Pass an input file with IPv6 prefixes and a target network size, the tool generates all possible subnets between (and including) the initial prefix and the target prefix size.
+        </p>
+    </article>
+
+    <article class="artifact-tile">
+        <div class="artifact-icon" aria-hidden="true">
+            <img src="{{ url_for('static', filename='img/zmap-logo.png') }}" alt="">
+        </div>
+        <h2>ZMap SRA Extensions</h2>
+        <p>
+            <strong>Repository:</strong> <a href="https://github.com/mkoch-tud/zmap" target="_blank" rel="noopener">
+            mkoch-tud/zmap</a>
+        </p>
+        <p>
+            Customized ZMap fork from <a href="https://github.com/tumi8/zmap.git" target="_blank" rel="noopener">
+            TU Munich</a> with an ICMPv6 router discovery module for Subnet-Router anycast probing -- use together with the GO address generator.
+        </p>
+    </article>
+</section>
+{% endblock %}
