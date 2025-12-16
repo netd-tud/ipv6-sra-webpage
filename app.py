@@ -89,7 +89,7 @@ def load_affected_ases():
             ases_path,
             has_header=False,
             new_columns=["asn"],
-            dtypes={"asn": pl.Int64},
+            schema_overrides={"asn": pl.Int64},
         )
     except Exception:
         return pl.DataFrame({"asn": []})
