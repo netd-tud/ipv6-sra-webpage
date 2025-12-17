@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn daemon for Flask app
+After=network.target
+
+[Service]
+User=youruser
+Group=www-data
+WorkingDirectory=/home/youruser/gunicorn-demo
+ExecStart=/home/youruser/gunicorn-demo/venv/bin/gunicorn --config gunicorn_config.py app:app
+Restart=always
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+

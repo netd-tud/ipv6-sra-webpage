@@ -2,3 +2,6 @@
 **/affected-ases.csv
 **/statistics.csv
 **/.venv/
+**/__pycache__/
+**/gunicorn.service
+**/*.log
