@@ -109,6 +109,14 @@ body p {
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
+.tile.left-align-tile {
+    text-align: left;
+}
+
+.legal-page.single-tile .tile {
+    margin-top: 2rem;
+}
+
 .tile h2 {
     font-size: 2.5rem;
     margin: 0;

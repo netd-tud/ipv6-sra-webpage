@@ -159,5 +159,9 @@ def artifacts():
 def contact():
     return render_template("contact.html")
 
+@app.route("/legalnotice")
+def legal_notice():
+    return render_template("legalnotice.html")
+
 if __name__ == "__main__":
     app.run(debug=False)
