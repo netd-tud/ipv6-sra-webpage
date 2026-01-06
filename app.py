@@ -155,6 +155,27 @@ def check_as():
 def artifacts():
     return render_template("artifacts.html")
 
+@app.route("/routingloops")
+def routingloops():
+    metrics = load_metrics()
+    references = load_references()
+    as_result = None
+    submitted_asn = ""
+    if request.method == "POST":
+        submitted_asn = request.form.get("asn", "").strip()
+        _, message, state = check_as_number(submitted_asn)
+        if state == "error":
+            as_result = {"message": message, "state": "error"}
+        else:
+            as_result = {"message": message, "state": state}
+    return render_template(
+        "routingloops.html",
+        metrics=metrics,
+        references=references,
+        as_result=as_result,
+        submitted_asn=submitted_asn
+    )
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html")

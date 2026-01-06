@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+    <h1>Routing Loops and Amplification in IPv6</h1>
+    <p>
+        TBD.
+    </p>
+</section>
+
+<section class="tiles">    
+    <div class="tile tile-plot-group">
+        <h2>Routing Loops and Amplification in IPv6</h2>
+        <div class="plot-row">
+            <figure>
+                <img src="{{ url_for('static', filename='data/figures/looping-subnets-per-router-rank.png') }}" alt="Looping subnets per router rank plot">
+                <figcaption>Number of /48 subnets per router IP address that trigger a routing loop.</figcaption>
+            </figure>
+            <figure>
+                <img src="{{ url_for('static', filename='data/figures/amplification-routingloops.png') }}" alt="Amplification vs routing loops plot">
+                <figcaption>Maximum amplification per router IP address.</figcaption>
+            </figure>
+        </div>
+        <div class="plot-metric-grid">
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
+                <p>/48 Subnets that trigger Routing Loops</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
+                <p>/48 Subnets that trigger Amplification</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.max_amplification }}">{{ metrics.max_amplification|si }}</h3>
+                <p>Maximum Observed Amplification Factor</p>
+            </div>
+        </div>
+        <div class="as-checker">
+            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
+                <label for="asn-input">Your AS Number:</label>
+                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
+                <button type="submit" class="as-checker-submit">Check if your network is affected</button>
+            </form>
+            <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">
+                {% if as_result %}
+                    {{ as_result.message }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="tile tile-reference">
+        <h2>If you use our data, please use the following reference:</h2>
+        {% for ref in references %}
+        <div class="reference-entry">
+            <pre><code>{{ ref }}</code></pre>
+            <button class="copy-reference">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="3" y="7" width="13" height="14" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Copy
+            </button>
+        </div>
+        {% else %}
+        <p>No references available.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

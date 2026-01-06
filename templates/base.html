@@ -12,9 +12,15 @@
 <header class="site-header">
     <div class="site-header-inner">
         <div class="nav-title">IPv6 Subnet-Router Anycast (SRA) Scanning</div>
+        <button class="nav-toggle" type="button" aria-controls="primary-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
         <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="/">Overview</a></li>
+            <ul class="nav-links" id="primary-nav">
+                <li><a href="/">Measurement Results</a></li>
+                <li><a href="/routingloops">Routing Loops</a></li>
                 <li><a href="https://doi.org/10.1145/3768997" target="_blank" rel="noopener">Paper</a></li>
                 <li><a href="/artifacts">Tools and Data</a></li>
                 <li><a href="/contact">Contact</a></li>
@@ -35,5 +41,62 @@
     </p>
 </footer>
 
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('.site-header');
+    const navBar = document.querySelector('.navbar');
+    const navLinksList = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const navBreakpoint = 900;
+
+    if (navToggle && header && navBar && navLinksList) {
+        const updateNavCollapse = () => {
+            const previousDisplay = navLinksList.style.display;
+            const previousVisibility = navLinksList.style.visibility;
+            const previousPosition = navLinksList.style.position;
+            const previousPointerEvents = navLinksList.style.pointerEvents;
+
+            navLinksList.style.display = 'flex';
+            navLinksList.style.visibility = 'hidden';
+            navLinksList.style.position = 'absolute';
+            navLinksList.style.pointerEvents = 'none';
+
+            const shouldCollapse = window.innerWidth < navBreakpoint;
+
+            navLinksList.style.display = previousDisplay;
+            navLinksList.style.visibility = previousVisibility;
+            navLinksList.style.position = previousPosition;
+            navLinksList.style.pointerEvents = previousPointerEvents;
+
+            header.classList.toggle('nav-collapsed', shouldCollapse);
+            if (!shouldCollapse) {
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        };
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = header.classList.toggle('nav-open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                if (header.classList.contains('nav-open')) {
+                    header.classList.remove('nav-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        updateNavCollapse();
+        window.addEventListener('resize', updateNavCollapse);
+
+        if ('ResizeObserver' in window) {
+            const navObserver = new ResizeObserver(updateNavCollapse);
+            navObserver.observe(navBar);
+        }
+    }
+</script>
 </body>
 </html>

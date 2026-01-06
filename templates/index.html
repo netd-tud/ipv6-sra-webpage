@@ -13,10 +13,11 @@
 </section>
 
 <section class="tiles">
-    <div class="tile-row tile-row-two first-row">
+    <div class="tile-row tile-row-two-thirds">
         <div class="tile metric-tile metric-hitlist">
             <div class="metric-hitlist-info">
                 <h2 class="metric-value" data-target="{{ metrics.router_ips }}">{{ metrics.router_ips|si }}</h2>
+                <h3 data-target="{{ metrics.last_scan }}">Last scan: {{ metrics.last_scan }}</h3>
                 <p>Observed Router IPv6 Addresses with Subnet-Router Anycast Probing</p>
             </div>
             <div class="hitlist-action-group">
@@ -29,7 +30,44 @@
                 </a>
             </div>
         </div>
+        <div class="tile metric-tile">
+            <h3>Routing Loops and Amplification</h3>
+        </div>
+    </div>
+    <div class="tile-row tile-row">
+        <h2>Comparison with other IPv6 Address Sources</h2>
+    </div>
+    <div class="tile-row tile-row-three">
         <div class="tile overlap-tile">
+            <h3>TU Munich Hitlist</h3>
+            <div class="overlap-circle">
+                <svg viewBox="0 0 120 120">
+                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
+                    <text x="60" y="55" text-anchor="middle">
+                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
+                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
+                    </text>
+                </svg>
+            </div>
+            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+        </div>
+        <div class="tile overlap-tile">
+            <h3>CAIDA ITDK</h3>
+            <div class="overlap-circle">
+                <svg viewBox="0 0 120 120">
+                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
+                    <text x="60" y="55" text-anchor="middle">
+                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
+                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
+                    </text>
+                </svg>
+            </div>
+            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+        </div>
+        <div class="tile overlap-tile">
+            <h3>RIPE Atlas</h3>
             <div class="overlap-circle">
                 <svg viewBox="0 0 120 120">
                     <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
@@ -43,46 +81,15 @@
             <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
         </div>
     </div>
-    
-    <div class="tile tile-plot-group">
-        <h2>Routing Loops and Amplification in IPv6</h2>
-        <div class="plot-row">
-            <figure>
-                <img src="{{ url_for('static', filename='data/figures/looping-subnets-per-router-rank.png') }}" alt="Looping subnets per router rank plot">
-                <figcaption>Number of /48 subnets per router IP address that trigger a routing loop.</figcaption>
-            </figure>
-            <figure>
-                <img src="{{ url_for('static', filename='data/figures/amplification-routingloops.png') }}" alt="Amplification vs routing loops plot">
-                <figcaption>Maximum amplification per router IP address.</figcaption>
-            </figure>
-        </div>
-        <div class="plot-metric-grid">
-            <div class="plot-metric">
-                <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
-                <p>/48 Subnets that trigger Routing Loops</p>
-            </div>
-            <div class="plot-metric">
-                <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
-                <p>/48 Subnets that trigger Amplification</p>
-            </div>
-            <div class="plot-metric">
-                <h3 class="metric-value" data-target="{{ metrics.max_amplification }}">{{ metrics.max_amplification|si }}</h3>
-                <p>Maximum Observed Amplification Factor</p>
-            </div>
-        </div>
-        <div class="as-checker">
-            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
-                <label for="asn-input">Your AS Number:</label>
-                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
-                <button type="submit" class="as-checker-submit">Check if your network is affected</button>
-            </form>
-            <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">
-                {% if as_result %}
-                    {{ as_result.message }}
-                {% endif %}
-            </div>
-        </div>
+
+    <div class="tile-row tile-row">
+        <h2>Results of Subnet-Router Anycast Scans</h2>
     </div>
+
+    <div class="tile tile-plot-full">
+        <h2>Overview of Measurements</h2>
+    </div>
+
     <div class="tile tile-plot-full">
         <h2>World Map of IPv6 Router IP Addresses found with SRA Probing</h2>
         <img src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.png') }}" alt="World map of SRA IPv6 addresses">
@@ -92,7 +99,7 @@
         <img src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.png') }}" alt="World map of SRA IPv6 addresses">
     </div>
     <div class="tile tile-reference">
-        <h2>If you are using our data, please cite us using the following reference:</h2>
+        <h2>If you use our data, please use the following reference:</h2>
         {% for ref in references %}
         <div class="reference-entry">
             <pre><code>{{ ref }}</code></pre>

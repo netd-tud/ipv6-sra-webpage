@@ -43,13 +43,50 @@ main {
     padding: 0;
 }
 
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    flex-direction: column;
+    padding: 0.35rem 0.6rem;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-toggle:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 .nav-links {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 0rem;
     flex-wrap: wrap;
 }
 
@@ -58,7 +95,7 @@ main {
 }
 
 .nav-title {
-    font-weight: 700;
+    font-weight: 900;
     font-size: 1.3rem;
     letter-spacing: 0.4px;
 }
@@ -68,7 +105,7 @@ main {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.3rem;
-    padding: 0.3rem 0.8rem;
+    padding: 0.4rem;
     border: 2px solid transparent;
     border-radius: 6px;
     transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
@@ -81,7 +118,7 @@ main {
 }
 
 .intro {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
 }
@@ -96,7 +133,7 @@ body p {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     padding: 0 2rem;
-    width: min(1200px, calc(100% - 4rem));
+    width: min(1200px, calc(100%-4rem));
     margin: 0 auto;
 }
 
@@ -293,8 +330,38 @@ body p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.tile-row-two-thirds {
+    grid-template-columns: 2fr 1fr;
+}
+
+.tile-row-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tile-row-four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 @media (max-width: 900px) {
     .tile-row-two {
+        grid-template-columns: 1fr;
+    }
+
+    .tile-row-two-thirds {
+        grid-template-columns: 1fr;
+    }
+
+    .tile-row-three {
+        grid-template-columns: 1fr;
+    }
+
+    .tile-row-four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .tile-row-four {
         grid-template-columns: 1fr;
     }
 }
@@ -694,5 +761,31 @@ body p {
     .navbar {
         width: 100%;
         justify-content: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .nav-toggle {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    .navbar {
+        flex-basis: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0.75rem;
+    }
+
+    .site-header.nav-open .nav-links {
+        display: flex;
     }
 }
