@@ -1,48 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loopsCtx = document.getElementById("loopsChart");
-  const ampCtx = document.getElementById("ampChart");
-
-  if (loopsCtx) {
-    new Chart(loopsCtx, {
-      type: "line",
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-        datasets: [
-          {
-            label: "Routing Loops",
-            data: [120, 150, 180, 170, 200, 220],
-            borderColor: "#00549f",
-            tension: 0.3,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-      },
-    });
-  }
-
-  if (ampCtx) {
-    new Chart(ampCtx, {
-      type: "bar",
-      data: {
-        labels: ["1x", "2x", "3x", "4x", "5x", "6x"],
-        datasets: [
-          {
-            label: "Amplification",
-            data: [30, 45, 50, 40, 30, 25],
-            backgroundColor: "#4f87c5",
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-      },
-    });
-  }
-
   const counters = document.querySelectorAll(".metric-value");
   const circles = document.querySelectorAll(".overlap-progress");
 
@@ -81,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const eased = easeOutExpo(progress);
       let value = eased * target;
       if (counter.classList.contains("metric-percentage")) {
-        counter.textContent = `${value.toFixed(1)}%`;
+        counter.textContent = `${value.toFixed(2)}%`;
       } else {
         value = Math.floor(value);
         counter.textContent =

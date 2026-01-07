@@ -30,8 +30,15 @@ DEFAULT_METRICS = {
     "max_amplification": 0,
     "router_ips": 0,
     "tum_hitlist": 0,
-    "overlap_absolute": 0,
-    "overlap_percentage": 0,
+    "overlap_hitlist_absolute": 0,
+    "overlap_hitlist_percentage": 0,
+    "total_hitlist": 0,
+    "overlap_itdk_absolute": 0,
+    "overlap_itdk_percentage": 0,
+    "total_itdk": 0,
+    "overlap_ripe_absolute": 0,
+    "overlap_ripe_percentage": 0,
+    "total_ripe": 0,
 }
 
 def load_references():
@@ -63,9 +70,27 @@ def load_metrics():
     except Exception:
         latest = df.to_dicts()[-1]
     column_map = {
+        "last_scan": "last-scan",
         "router_ips": "router-ips",
-        "overlap_absolute": "overlap-hitlist-absolute",
-        "overlap_percentage": "overlap-hitlist-percentage",
+        "total_asn": "total-asn",
+        "overlap_hitlist_absolute": "overlap-hitlist-absolute",
+        "overlap_hitlist_percentage": "overlap-hitlist-percentage",
+        "total_hitlist": "total-hitlist",
+        "overlap_itdk_absolute": "overlap-itdk-absolute",
+        "overlap_itdk_percentage": "overlap-itdk-percentage",
+        "total_itdk":"total-itdk",
+        "overlap_ripe_absolute": "overlap-ripe-absolute",
+        "overlap_ripe_percentage": "overlap-ripe-percentage",
+        "total_ripe":"total-ripe",
+        "overlap_asn_hitlist_absolute": "overlap-asn-hitlist-absolute",
+        "overlap_asn_hitlist_percentage": "overlap-asn-hitlist-percentage",
+        "total_asn_hitlist": "total-asn-hitlist",
+        "overlap_asn_itdk_absolute": "overlap-asn-itdk-absolute",
+        "overlap_asn_itdk_percentage": "overlap-asn-itdk-percentage",
+        "total_asn_itdk":"total-asn-itdk",
+        "overlap_asn_ripe_absolute": "overlap-asn-ripe-absolute",
+        "overlap_asn_ripe_percentage": "overlap-asn-ripe-percentage",
+        "total_asn_ripe":"total-asn-ripe",
         "looping_subnets": "looping-subnets",
         "amplifying_subnets": "amplifying-subnets",
         "max_amplification": "max-amplification",
@@ -75,7 +100,7 @@ def load_metrics():
         if value is None:
             continue
         try:
-            metrics[metric_key] = float(value) if "percentage" in metric_key else int(value)
+            metrics[metric_key] = float(value) if "percentage" in metric_key else int(value) if not "last_scan" in metric_key else value
         except (TypeError, ValueError):
             continue
     return metrics

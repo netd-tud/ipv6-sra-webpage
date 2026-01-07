@@ -13,12 +13,14 @@
 </section>
 
 <section class="tiles">
-    <div class="tile-row tile-row-two-thirds">
+    <div class="tile-row tile-row">
         <div class="tile metric-tile metric-hitlist">
             <div class="metric-hitlist-info">
                 <h2 class="metric-value" data-target="{{ metrics.router_ips }}">{{ metrics.router_ips|si }}</h2>
-                <h3 data-target="{{ metrics.last_scan }}">Last scan: {{ metrics.last_scan }}</h3>
                 <p>Observed Router IPv6 Addresses with Subnet-Router Anycast Probing</p>
+                <h2 class="metric-value" data-target="{{ metrics.total_asn }}">{{ metrics.total_asn|si }}</h2>
+                <p>Autonomous Systems covered by the found Router IPv6 Addresses</p>
+                <h3 data-target="{{ metrics.last_scan }}">Last scan: {{ metrics.last_scan }}</h3>
             </div>
             <div class="hitlist-action-group">
                 <a class="hitlist-download" href="{{ url_for('static', filename='data/router-hitlist.csv.zst') }}" download>
@@ -30,60 +32,188 @@
                 </a>
             </div>
         </div>
-        <div class="tile metric-tile">
-            <h3>Routing Loops and Amplification</h3>
-        </div>
     </div>
+
     <div class="tile-row tile-row">
         <h2>Comparison with other IPv6 Address Sources</h2>
     </div>
+
     <div class="tile-row tile-row-three">
         <div class="tile overlap-tile">
-            <h3>TU Munich Hitlist</h3>
-            <div class="overlap-circle">
-                <svg viewBox="0 0 120 120">
-                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
-                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
-                    <text x="60" y="55" text-anchor="middle">
-                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
-                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
-                    </text>
-                </svg>
+            <h2>TU Munich Hitlist</h2>
+            <h3 class="subtitle-left-aligned">IPv6 Addresses</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_hitlist }}">{{ metrics.total_hitlist|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_hitlist_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_hitlist_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_hitlist_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_hitlist_absolute }}">{{ metrics.overlap_hitlist_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+            <h3 class="subtitle-left-aligned">Autonomous Systems</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_asn_hitlist }}">{{ metrics.total_asn_hitlist|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_asn_hitlist_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_asn_hitlist_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_asn_hitlist_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_asn_hitlist_absolute }}">{{ metrics.overlap_asn_hitlist_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-long-topmargin">
+            <div class="hitlist-action-group">
+                <a class="hitlist-download" href="https://ipv6hitlist.github.io" target="_blank">
+                    TU Munich Hitlist Data
+                </a>
+            </div>
         </div>
+
         <div class="tile overlap-tile">
-            <h3>CAIDA ITDK</h3>
-            <div class="overlap-circle">
-                <svg viewBox="0 0 120 120">
-                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
-                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
-                    <text x="60" y="55" text-anchor="middle">
-                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
-                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
-                    </text>
-                </svg>
+            <h2>CAIDA ITDK</h2>
+            <h3 class="subtitle-left-aligned">IPv6 Addresses</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_itdk }}">{{ metrics.total_itdk|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_itdk_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_itdk_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_itdk_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_itdk_absolute }}">{{ metrics.overlap_itdk_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+            <h3 class="subtitle-left-aligned">Autonomous Systems</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_asn_itdk }}">{{ metrics.total_asn_itdk|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_asn_itdk_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_asn_itdk_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_asn_itdk_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_asn_itdk_absolute }}">{{ metrics.overlap_asn_itdk_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-long-topmargin">
+            <div class="hitlist-action-group">
+                <a class="hitlist-download" href="https://www.caida.org/catalog/datasets/ipv6_allpref_topology_dataset/" target="_blank">
+                    CAIDA ITDK Dataset
+                </a>
+            </div>
         </div>
+
         <div class="tile overlap-tile">
-            <h3>RIPE Atlas</h3>
-            <div class="overlap-circle">
-                <svg viewBox="0 0 120 120">
-                    <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
-                    <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_percentage }}"></circle>
-                    <text x="60" y="55" text-anchor="middle">
-                        <tspan class="overlap-value metric-value" data-target="{{ metrics.overlap_absolute }}">{{ metrics.overlap_absolute|si }}</tspan>
-                        <tspan x="60" dy="26" class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_percentage }}">{{ '{:.1f}%'.format(metrics.overlap_percentage) }}</tspan>
-                    </text>
-                </svg>
+            <h2>RIPE Atlas</h2>
+            <h3 class="subtitle-left-aligned">IPv6 Addresses</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_ripe }}">{{ metrics.total_ripe|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_ripe_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_ripe_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_ripe_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_ripe_absolute }}">{{ metrics.overlap_ripe_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <p>Router IP Addresses Overlapping with the <a href="https://ipv6hitlist.github.io">TU Munich IPv6 Hitlist</a></p>
+            <h3 class="subtitle-left-aligned">Autonomous Systems</h3>
+            <hr class="hr-long">
+            <div class="overlap-metric-row">
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Total</h3>
+                    <div class="hitlist-total metric-value" data-target="{{ metrics.total_asn_ripe }}">{{ metrics.total_asn_ripe|si }}</div>
+                </div>
+                <div class="overlap-subtile overlap-subtile-overlap">
+                    <h3>Overlap with SRA</h3>
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.overlap_asn_ripe_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.overlap_asn_ripe_percentage }}">{{ '{:.2f}%'.format(metrics.overlap_asn_ripe_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.overlap_asn_ripe_absolute }}">{{ metrics.overlap_asn_ripe_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-long-topmargin">
+            <div class="hitlist-action-group">
+                <a class="hitlist-download" href="https://labs.ripe.net/author/emileaben/latency-into-your-network-as-seen-from-ripe-atlas/" target="_blank">
+                    RIPE Atlas Traceroutes
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="tile-row tile-row">
         <h2>Results of Subnet-Router Anycast Scans</h2>
+    </div>
+
+    <div class="tile-row tile-row">
+        <div class="artifact-tile artifact-tile-horizontal">
+            <div class="artifact-icon" aria-hidden="true">
+                <img src="{{ url_for('static', filename='img/red-signal-light.svg') }}" alt="">
+            </div>
+            <div class="artifact-content">
+                <h2 class="heading-centered">We analyze known issues in IPv6: Routing loops and amplification.</h2>
+                <div class="hitlist-action-group">
+                    <a class="hitlist-download" href="{{ url_for('routingloops') }}">
+                        Explore
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="tile tile-plot-full">
@@ -92,7 +222,13 @@
 
     <div class="tile tile-plot-full">
         <h2>World Map of IPv6 Router IP Addresses found with SRA Probing</h2>
-        <img src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.png') }}" alt="World map of SRA IPv6 addresses">
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
     </div>
     <div class="tile tile-plot-full">
         <h2>Comparison of Network Types across multiple IPv6 Address Data Sources</h2>
@@ -114,6 +250,16 @@
         {% else %}
         <p>No references available.</p>
         {% endfor %}
+    </div>
+
+    <div class="tile-row tile-row">
+        <div class="tile logo-tile">
+            <div class="logo-grid">
+                <img src="{{ url_for('static', filename='img/TUD_Logo_RGB_horizontal_blau_en.svg') }}" alt="TU Dresden logo">
+                <img src="{{ url_for('static', filename='img/HAW_Marke_RGB_300dpi.png') }}" alt="HAW Hamburg logo">
+                <img src="{{ url_for('static', filename='img/BMFTR_en_DTP_CMYK_gef_durch.png') }}" alt="BMFTR funded by logo">
+            </div>
+        </div>
     </div>
 </section>
 

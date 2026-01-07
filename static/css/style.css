@@ -243,6 +243,63 @@ body p {
     margin-bottom: 1rem;
 }
 
+.overlap-metric-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    column-gap: 1.4rem;
+    align-items: start;
+}
+
+.overlap-subtile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.overlap-subtile-total {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.overlap-subtile-overlap {
+    text-align: center;
+    align-items: center;
+}
+
+.hitlist-total {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: var(--tu-blue);
+    justify-self: start;
+    margin-top: 1.5rem;
+}
+
+.overlap-metric-row .overlap-circle {
+    width: 120px;
+    height: 120px;
+    justify-self: center;
+}
+
+.subtitle-left-aligned {
+    text-align: left;
+    align-self: stretch;
+}
+
+.hr-long,
+.hr-long-topmargin {
+    width: 100%;
+    text-align: left;
+    margin-left: 0;
+    margin-top: -1rem;
+}
+
+.hr-long-topmargin {
+    margin-top: 1rem;
+}
+
 .overlap-circle {
     width: 140px;
     height: 140px;
@@ -358,6 +415,16 @@ body p {
     .tile-row-four {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .overlap-metric-row {
+        grid-template-columns: 1fr;
+        row-gap: 0.4rem;
+    }
+
+    .overlap-label-row,
+    .overlap-values-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 600px) {
@@ -388,9 +455,17 @@ body p {
 
 .plot-row img,
 .tile-plot-full img,
-.tile-plot-half img {
+.tile-plot-half img,
+.plot-row iframe,
+.tile-plot-full iframe,
+.tile-plot-half iframe {
     width: 100%;
     border-radius: 12px;
+}
+
+.plot-embed {
+    border: 0;
+    display: block;
 }
 
 .plot-row figcaption {
@@ -498,6 +573,26 @@ body p {
 .tile-reference {
     grid-column: 1 / -1;
     text-align: left;
+}
+
+.logo-tile {
+    border-top-color: transparent;
+    padding: 1.5rem 2rem;
+}
+
+.logo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem 2.5rem;
+}
+
+.logo-grid img {
+    max-height: 80px;
+    width: auto;
+    max-width: 240px;
+    object-fit: contain;
 }
 
 .tile-reference h2 {
@@ -632,6 +727,43 @@ body p {
     padding: 2rem;
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     border-top: 4px solid var(--tu-blue);
+}
+
+.artifact-tile-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.artifact-tile-horizontal .artifact-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.artifact-tile-horizontal .artifact-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+.artifact-tile-horizontal h2 {
+    margin-top: 0;
+}
+
+.heading-centered {
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .artifact-tile-horizontal {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .artifact-tile-horizontal .artifact-icon {
+        margin-bottom: 0.75rem;
+    }
 }
 
 .artifact-tile h2 {
