@@ -70,9 +70,14 @@ def load_metrics():
     except Exception:
         latest = df.to_dicts()[-1]
     column_map = {
-        "last_scan": "last-scan",
+        "last_scan_date": "last-scan",
+        "hitlist_date": "hitlist-date",
+        "itdk_date": "itdk-date",
+        "ripe_date": "ripe-date",
         "router_ips": "router-ips",
         "total_asn": "total-asn",
+        "not_seen_by_other_sources_absolute": "not-seen-by-other-sources-absolute",
+        "not_seen_by_other_sources_percentage": "not-seen-by-other-sources-percentage",
         "overlap_hitlist_absolute": "overlap-hitlist-absolute",
         "overlap_hitlist_percentage": "overlap-hitlist-percentage",
         "total_hitlist": "total-hitlist",
@@ -100,7 +105,7 @@ def load_metrics():
         if value is None:
             continue
         try:
-            metrics[metric_key] = float(value) if "percentage" in metric_key else int(value) if not "last_scan" in metric_key else value
+            metrics[metric_key] = float(value) if "percentage" in metric_key else int(value) if not "date" in metric_key else value
         except (TypeError, ValueError):
             continue
     return metrics
@@ -210,4 +215,4 @@ def legal_notice():
     return render_template("legalnotice.html")
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

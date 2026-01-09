@@ -4,7 +4,10 @@
 <section class="intro">
     <h1>Routing Loops and Amplification in IPv6</h1>
     <p>
-        TBD.
+        Routing loops and amplification of looping packets are a known problem in IPv6
+deployments. We confirm that both problems are still present. They lack attention from the operator
+community. During our active scans, we discovered a serious bug in the firmware of common
+router vendors that is triggered by routing loops and can lead to significant amplification.
     </p>
 </section>
 
@@ -48,22 +51,9 @@
             </div>
         </div>
     </div>
-    <div class="tile tile-reference">
-        <h2>If you use our data, please use the following reference:</h2>
-        {% for ref in references %}
-        <div class="reference-entry">
-            <pre><code>{{ ref }}</code></pre>
-            <button class="copy-reference">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <rect x="3" y="7" width="13" height="14" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Copy
-            </button>
-        </div>
-        {% else %}
-        <p>No references available.</p>
-        {% endfor %}
+    <div class="tile tile-plot-full">
+        <h2>Missing NULL Routes in Combination with Default Routes lead to Routing Loops</h2>
+        <img src="{{ url_for('static', filename='img/routingloops-figure.svg') }}" alt="SRA Address Generation">
     </div>
 </section>
 
