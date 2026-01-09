@@ -215,4 +215,4 @@ def legal_notice():
     return render_template("legalnotice.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
