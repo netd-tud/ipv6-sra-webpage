@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="intro">
+    <h1>Scanning the IPv6 Internet using Subnet-Router Anycast Probing</h1>
+
+</section>
+
+<section class="tiles">
+    <div class="tile tile-plot-full">
+        <h2>Overview of Measurements</h2>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/scan_overview_plot.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
+    </div>
+
+    <div class="tile tile-plot-full">
+        <h2>World Map of IPv6 Router IP Addresses Observed with SRA Probing</h2>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
+    </div>
+    <div class="tile tile-plot-full">
+        <h2>Comparison of Network Types across multiple IPv6 Address Data Sources</h2>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
+    </div>
+     <div class="tile-row tile-row">
+        <div class="artifact-tile artifact-tile-horizontal">
+            <div class="artifact-icon" aria-hidden="true">
+                <img src="{{ url_for('static', filename='img/red-signal-light.svg') }}" alt="">
+            </div>
+            <div class="artifact-content">
+                <h2 class="heading-centered">We analyze known issues in IPv6: Routing loops and amplification.</h2>
+                <div class="hitlist-action-group">
+                    <a class="hitlist-download" href="{{ url_for('routingloops') }}">
+                        Explore
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -143,38 +143,7 @@
         <h2>Results of Subnet-Router Anycast Scans</h2>
     </div>  
 
-    <div class="tile tile-plot-full">
-        <h2>Overview of Measurements</h2>
-        <iframe
-            class="plot-embed"
-            src="{{ url_for('static', filename='data/figures/scan_overview_plot.html') }}"
-            title="World map of SRA IPv6 addresses"
-            loading="lazy"
-            height="520"
-        ></iframe>
-    </div>
-
-    <div class="tile tile-plot-full">
-        <h2>World Map of IPv6 Router IP Addresses Observed with SRA Probing</h2>
-        <iframe
-            class="plot-embed"
-            src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.html') }}"
-            title="World map of SRA IPv6 addresses"
-            loading="lazy"
-            height="520"
-        ></iframe>
-    </div>
-    <div class="tile tile-plot-full">
-        <h2>Comparison of Network Types across multiple IPv6 Address Data Sources</h2>
-        <iframe
-            class="plot-embed"
-            src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.html') }}"
-            title="World map of SRA IPv6 addresses"
-            loading="lazy"
-            height="520"
-        ></iframe>
-    </div>
-     <div class="tile-row tile-row">
+    <div class="tile-row tile-row">
         <div class="artifact-tile artifact-tile-horizontal">
             <div class="artifact-icon" aria-hidden="true">
                 <img src="{{ url_for('static', filename='img/red-signal-light.svg') }}" alt="">
@@ -209,20 +178,20 @@
 
     <div class="tile-row tile-row">
         <div class="tile logo-tile">
-            <h3>Partners</h3>
+            <h3>Powered by</h3>
             <div class="logo-grid">
                 <img src="{{ url_for('static', filename='img/logos/tud-logo-long.svg') }}" alt="TU Dresden logo">
                 <img src="{{ url_for('static', filename='img/logos/haw-logo.png') }}" alt="HAW Hamburg logo">
-                <img src="{{ url_for('static', filename='img/logos/tum-logo.png') }}" alt="TU Munich logo">
                 <img src="{{ url_for('static', filename='img/logos/bmftr-funding.png') }}" alt="BMFTR funded by logo">
             </div>
             <h3>External Data Providers</h3>
             <div class="logo-grid">
-                <img src="{{ url_for('static', filename='img/logos/external/maxmind-logo.svg') }}" alt="Maxmind logo">
-                <img src="{{ url_for('static', filename='img/logos/external/ipinfo.svg') }}" alt="IPinfo logo">
-                <img src="{{ url_for('static', filename='img/logos/external/routeviews.svg') }}" alt="Routeviews logo">
-                <img src="{{ url_for('static', filename='img/logos/external/ripeatlas.svg') }}" alt="RIPE Atlas logo">
-                <img src="{{ url_for('static', filename='img/logos/external/caida.png') }}" alt="CAIDA logo">
+                <img class="logo-small" src="{{ url_for('static', filename='img/logos/tum-logo.png') }}" alt="TU Munich logo">
+                <img class="logo-medium" src="{{ url_for('static', filename='img/logos/external/routeviews.svg') }}" alt="Routeviews logo">
+                <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/ripeatlas.svg') }}" alt="RIPE Atlas logo">
+                <img class="logo-medium" src="{{ url_for('static', filename='img/logos/external/caida.png') }}" alt="CAIDA logo">
+                <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/maxmind-logo.svg') }}" alt="Maxmind logo">
+                <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/ipinfo.svg') }}" alt="IPinfo logo">
             </div>
         </div>
     </div>

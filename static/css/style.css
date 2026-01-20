@@ -98,6 +98,8 @@ main {
     font-weight: 900;
     font-size: 1.3rem;
     letter-spacing: 0.4px;
+    color: #fff;
+    text-decoration: none;
 }
 
 .nav-links a {
@@ -630,6 +632,16 @@ body p {
     width: auto;
     max-width: 240px;
     object-fit: contain;
+}
+
+.logo-grid img.logo-small {
+    max-height: 40px;
+    max-width: 160px;
+}
+
+.logo-grid img.logo-medium{
+    max-height: 60px;
+    max-width: 160px;
 }
 
 .tile-reference h2 {

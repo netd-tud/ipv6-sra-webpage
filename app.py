@@ -214,5 +214,9 @@ def contact():
 def legal_notice():
     return render_template("legalnotice.html")
 
+@app.route("/measurement-results")
+def measurement_results():
+    return render_template("measurement-results.html")
+
 if __name__ == "__main__":
     app.run(debug=False)
