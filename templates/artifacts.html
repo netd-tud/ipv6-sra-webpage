@@ -10,41 +10,6 @@
 
 <section class="artifact-grid">
     <article class="artifact-tile">
-        <div class="artifact-icon-row">
-            <div class="artifact-icon" aria-hidden="true">
-                <img src="{{ url_for('static', filename='img/artifact-icon.png') }}" alt="">
-            </div>
-            <div class="artifact-badge-panel">
-                <img src="{{ url_for('static', filename='img/artifacts_available_v1_1.png') }}" alt="Artifacts Available badge">
-                <img src="{{ url_for('static', filename='img/artifacts_evaluated_functional_v1_1.png') }}" alt="Artifacts Evaluated Functional badge">
-                <img src="{{ url_for('static', filename='img/artifacts_evaluated_results_reproduced_v1_1.png') }}" alt="Artifacts Evaluated Results Reproduced badge">
-            </div>
-        </div>
-        <h2>Paper Artifacts</h2>
-        <p>
-            <strong>Repository:</strong> <a href="https://github.com/netd-tud/artifacts-ipv6-sra-scanning" target="_blank" rel="noopener">
-            netd-tud/artifacts-ipv6-sra-scanning</a>
-        </p>
-        <p>
-            This repository contains the artifacts to reproduce plots and tables, and includes the tools to run your own IPv6 SRA measurements.
-        </p>
-    </article>
-
-    <article class="artifact-tile">
-        <div class="artifact-icon" aria-hidden="true">
-            <img src="{{ url_for('static', filename='img/data-icon.png') }}" alt="">
-        </div>
-        <h2>Measurement Data (OPARA)</h2>
-        <p>
-            <strong>Dataset:</strong> <a href="https://doi.org/10.25532/OPARA-979" target="_blank" rel="noopener">
-            doi.org/10.25532/OPARA-979</a>
-        </p>
-        <p>
-            This dataset is part of the artifact collection and contains all the necessary dataframes to reproduce paper and tables of our paper.
-        </p>
-    </article>
-
-    <article class="artifact-tile">
         <div class="artifact-icon" aria-hidden="true">
             <img src="{{ url_for('static', filename='img/go-icon.png') }}" alt="">
         </div>
@@ -73,5 +38,42 @@
             TU Munich</a> with an ICMPv6 router discovery module for Subnet-Router anycast probing -- use together with the GO address generator.
         </p>
     </article>
+
+    <article class="artifact-tile">
+        <div class="artifact-icon-row">
+            <div class="artifact-icon" aria-hidden="true">
+                <img src="{{ url_for('static', filename='img/artifact-icon.png') }}" alt="">
+            </div>
+            <div class="artifact-badge-panel">
+                <img src="{{ url_for('static', filename='img/artifacts_available_v1_1.png') }}" alt="Artifacts Available badge">
+                <img src="{{ url_for('static', filename='img/artifacts_evaluated_functional_v1_1.png') }}" alt="Artifacts Evaluated Functional badge">
+                <img src="{{ url_for('static', filename='img/artifacts_evaluated_results_reproduced_v1_1.png') }}" alt="Artifacts Evaluated Results Reproduced badge">
+            </div>
+        </div>
+        <h2>Artifacts: Scanning the IPv6 Internet Using Subnet-Router Anycast Probing</h2>
+        <p>
+            <strong>Repository:</strong> <a href="https://github.com/netd-tud/artifacts-ipv6-sra-scanning" target="_blank" rel="noopener">
+            netd-tud/artifacts-ipv6-sra-scanning</a>
+        </p>
+        <p>
+            This repository contains the artifacts to reproduce plots and tables, and includes the tools to run your own IPv6 SRA measurements.
+        </p>
+    </article>
+
+    <article class="artifact-tile">
+        <div class="artifact-icon" aria-hidden="true">
+            <img src="{{ url_for('static', filename='img/data-icon.png') }}" alt="">
+        </div>
+        <h2>Measurement Data (OPARA)</h2>
+        <p>
+            <strong>Dataset:</strong> <a href="https://doi.org/10.25532/OPARA-979" target="_blank" rel="noopener">
+            doi.org/10.25532/OPARA-979</a>
+        </p>
+        <p>
+            This dataset is part of the artifact collection and contains all the necessary dataframes to reproduce paper and tables of our paper.
+        </p>
+    </article>
+
+    
 </section>
 {% endblock %}

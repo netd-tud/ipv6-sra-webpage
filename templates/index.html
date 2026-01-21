@@ -64,13 +64,11 @@
 ] %}
 
 <section class="intro">
-    <h1>Scanning the IPv6 Internet using Subnet-Router Anycast Probing</h1>
+    <h1>IPv6 Subnet-Router Anycast (SRA) Dataset</h1>
     <p>
-        We propose a commonly unused method to probe the IPv6 address space. Instead of random probing, we probe the Subnet-Router anycast address of a subnet.
-        Subnet-Router anycast addresses are defined in <a href="https://doi.org/10.17487/RFC1884">RFC 1884</a>.
-        By probing the SRA address of a subnet, we significantly lower the impact of ICMP error message rate limiting, as probing these addresses can trigger ICMP Echo replies.
-        This webpage presents our most recent results from our regular scans.
-        We provide a list of the found router IPv6 addresses as well as information on current routing loop deployment and ICMP time exceeded amplification in IPv6.
+        This dataset is a collection of IPv6 router addresses discovered using Subnet-Router Anycast (SRA) probing.
+        We provide a list of IPv6 router addresses observed during our scans, along with 
+        detailed metrics and comparisons with other well-known IPv6 address datasets.
     </p>
 </section>
 
@@ -80,9 +78,9 @@
             <div class="metric-hitlist-content">
                 <div class="metric-hitlist-info">
                     <h2 class="metric-value" data-target="{{ metrics.router_ips }}">{{ metrics.router_ips|si }}</h2>
-                    <p>Observed Router IPv6 Addresses with Subnet-Router Anycast Probing</p>
+                    <p>Observed router IPv6 addresses with subnet-router anycast probing</p>
                     <h2 class="metric-value" data-target="{{ metrics.total_asn }}">{{ metrics.total_asn|si }}</h2>
-                    <p>Autonomous Systems covered by the found Router IPv6 Addresses</p>
+                    <p>Autonomous systems covered by the found router IPv6 addresses</p>
                     <h3 data-target="{{ metrics.last_scan_date }}">Last scan: {{ metrics.last_scan_date }}</h3>
                 </div>
                 <div class="metric-hitlist-overlap">
@@ -96,7 +94,7 @@
                             </text>
                         </svg>
                     </div>
-                    <p>IPv6 Router IP Addresses not Observed in the Other Data Sources</p>
+                    <p>IPv6 router IPv6 addresses not observed in the comparison data sources</p>
                 </div>
             </div>
             <div class="hitlist-action-group">
@@ -105,21 +103,21 @@
                         <path d="M12 3v11m0 0l-4-4m4 4l4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M5 15v4h14v-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    SRA Router IP Addresses
+                    SRA router IPv6 addresses
                 </a>
             </div>
         </div>
     </div>
 
     <div class="tile-row tile-row">
-        <h2>Comparison with other IPv6 Address Sources</h2>
+        <h2>Comparison with other IPv6 address sources</h2>
     </div>
 
     <div class="tile-row tile-row-three">
         {% for source in overlap_sources %}
         <div class="tile overlap-tile">
             <h2>{{ source.title }}</h2>
-            <h3 data-target="{{ metrics[source.date_key] }}">Last retrieved: {{ metrics[source.date_key] }}</h3>
+            <h3 data-target="{{ metrics[source.date_key] }}">Last comparison: {{ metrics[source.date_key] }}</h3>
             {{ overlap_section("IPv6 Addresses", source.total_addr_key, source.overlap_addr_pct_key, source.overlap_addr_abs_key) }}
             {{ overlap_section("Autonomous Systems", source.total_asn_key, source.overlap_asn_pct_key, source.overlap_asn_abs_key) }}
             <hr class="hr-long-topmargin">
@@ -131,17 +129,7 @@
         </div>
         {% endfor %}
     </div>
-    <div class="tile tile-plot-full">
-        <h2>SRA Candidate Set Generation Pipeline</h2>
-        <img src="{{ url_for('static', filename='img/sra-scanning-pipeline.svg') }}" alt="SRA Scanning Pipeline">
-    </div>
-    <div class="tile tile-plot-full">
-        <h2>Generation of Subnet-Router Anycast Addresses</h2>
-        <img src="{{ url_for('static', filename='img/sra-address-generation.svg') }}" alt="SRA Address Generation">
-    </div>
-    <div class="tile-row tile-row">
-        <h2>Results of Subnet-Router Anycast Scans</h2>
-    </div>  
+    
 
     <div class="tile-row tile-row">
         <div class="artifact-tile artifact-tile-horizontal">
@@ -184,7 +172,7 @@
                 <img src="{{ url_for('static', filename='img/logos/haw-logo.png') }}" alt="HAW Hamburg logo">
                 <img src="{{ url_for('static', filename='img/logos/bmftr-funding.png') }}" alt="BMFTR funded by logo">
             </div>
-            <h3>External Data Providers</h3>
+            <h3>External data providers</h3>
             <div class="logo-grid">
                 <img class="logo-small" src="{{ url_for('static', filename='img/logos/tum-logo.png') }}" alt="TU Munich logo">
                 <img class="logo-medium" src="{{ url_for('static', filename='img/logos/external/routeviews.svg') }}" alt="Routeviews logo">
