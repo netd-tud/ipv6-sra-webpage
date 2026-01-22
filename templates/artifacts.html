@@ -2,9 +2,9 @@
 
 {% block content %}
 <section class="intro">
-    <h1>Tools and Data to Replicate our Experiments</h1>
+    <h1>Measurement tools and artifacts to replicate our experiments</h1>
     <p>
-        Below are all repositories linked to (i) reproduce the results of our paper "Scanning the IPv6 Internet Using Subnet-Router Anycast Probing" and (ii) run your own SRA measurements.
+        We publish all measurement tools and artifacts to (i) reproduce the results of our paper "Scanning the IPv6 Internet Using Subnet-Router Anycast Probing" and (ii) setup your own SRA measurements.
     </p>
 </section>
 
@@ -35,11 +35,10 @@
         </p>
         <p>
             Customized ZMap fork from <a href="https://github.com/tumi8/zmap.git" target="_blank" rel="noopener">
-            TU Munich</a> with an ICMPv6 router discovery module for Subnet-Router anycast probing -- use together with the GO address generator.
+            TU Munich</a> with an ICMPv6 router discovery module for Subnet-Router anycast probing --- use it together with the GO address generator to perform large scale measurements.
         </p>
     </article>
-
-    <article class="artifact-tile">
+    <article class="artifact-tile artifact-tile-full">
         <div class="artifact-icon-row">
             <div class="artifact-icon" aria-hidden="true">
                 <img src="{{ url_for('static', filename='img/artifact-icon.png') }}" alt="">
@@ -57,20 +56,6 @@
         </p>
         <p>
             This repository contains the artifacts to reproduce plots and tables, and includes the tools to run your own IPv6 SRA measurements.
-        </p>
-    </article>
-
-    <article class="artifact-tile">
-        <div class="artifact-icon" aria-hidden="true">
-            <img src="{{ url_for('static', filename='img/data-icon.png') }}" alt="">
-        </div>
-        <h2>Measurement Data (OPARA)</h2>
-        <p>
-            <strong>Dataset:</strong> <a href="https://doi.org/10.25532/OPARA-979" target="_blank" rel="noopener">
-            doi.org/10.25532/OPARA-979</a>
-        </p>
-        <p>
-            This dataset is part of the artifact collection and contains all the necessary dataframes to reproduce paper and tables of our paper.
         </p>
     </article>
 

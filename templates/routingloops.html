@@ -2,22 +2,24 @@
 
 {% block content %}
 <section class="intro">
-    <h1>Routing Loops and Amplification in IPv6</h1>
+    <h1>IPv6 Subnet-Router anycast dataset: Routing loops</h1>
     <p>
-        Routing loops and amplification of looping packets are a known problem in IPv6
-deployments. We confirm that both problems are still present. They lack attention from the operator
-community. During our active scans, we discovered a serious bug in the firmware of common
-router vendors that is triggered by routing loops and can lead to significant amplification.
+        This page presents detailed results on routing loops and amplification of looping packets.
+        We provide plots on the number of looping /48 subnets per router IP address, amplification factors, 
+        and an explanation of the emergence of routing loop as well as a fix to avoid routing loops in IPv6 networks.
     </p>
 </section>
 
 <section class="tiles">    
     <div class="tile tile-plot-group">
-        <h2>Routing Loops and Amplification in IPv6</h2>
+        <h2>Routing loops and amplification in IPv6</h2>
+        <p>
+            The following plots and metrics summarize our findings on routing loops and amplification in IPv6 networks.
+        </p>
         <div class="plot-row">
             <figure>
                 <img src="{{ url_for('static', filename='data/figures/looping-subnets-per-router-rank.png') }}" alt="Looping subnets per router rank plot">
-                <figcaption>Number of /48 subnets per router IP address that trigger a routing loop.</figcaption>
+                <figcaption>Number of /64 subnets per router IP address that trigger a routing loop.</figcaption>
             </figure>
             <figure>
                 <img src="{{ url_for('static', filename='data/figures/amplification-routingloops.png') }}" alt="Amplification vs routing loops plot">
@@ -27,20 +29,20 @@ router vendors that is triggered by routing loops and can lead to significant am
         <div class="plot-metric-grid">
             <div class="plot-metric">
                 <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
-                <p>/48 Subnets that trigger Routing Loops</p>
+                <p>/64 Subnets that trigger routing loops</p>
             </div>
             <div class="plot-metric">
                 <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
-                <p>/48 Subnets that trigger Amplification</p>
+                <p>/64 Subnets that trigger amplification</p>
             </div>
             <div class="plot-metric">
                 <h3 class="metric-value" data-target="{{ metrics.max_amplification }}">{{ metrics.max_amplification|si }}</h3>
-                <p>Maximum Observed Amplification Factor</p>
+                <p>Maximum observed amplification factor</p>
             </div>
         </div>
         <div class="as-checker">
             <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
-                <label for="asn-input">Your AS Number:</label>
+                <label for="asn-input">Your AS number:</label>
                 <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
                 <button type="submit" class="as-checker-submit">Check if your network is affected</button>
             </form>
@@ -52,8 +54,19 @@ router vendors that is triggered by routing loops and can lead to significant am
         </div>
     </div>
     <div class="tile tile-plot-full">
-        <h2>Missing NULL Routes in Combination with Default Routes lead to Routing Loops</h2>
-        <img src="{{ url_for('static', filename='img/routingloops-figure.svg') }}" alt="SRA Address Generation">
+        <h2>Missing NULL routes in combination with default routes can lead to routing loops</h2>
+        <p>
+            This figure illustrates how routing loops can emerge in IPv6 networks when NULL routes are missing for specific prefixes, 
+            default routes are present, and the provider assigns provider aggregated (PA) address space to their customers.
+        </p>
+        <img src="{{ url_for('static', filename='img/routingloops-figure.svg') }}" alt="Overview of routing loop emergence.">
+    </div>
+    <div class="tile tile-plot-full">
+        <h2>Set NULL routes to prevent routing loops!</h2>
+        <p>
+            This figure illustrates how to prevent routing loops by setting NULL routes for unused address space.
+        </p>
+        <img src="{{ url_for('static', filename='img/routingloops-fix.svg') }}" alt="Routing loop fix.">
     </div>
 </section>
 

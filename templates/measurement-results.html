@@ -3,13 +3,17 @@
 {% block content %}
 
 <section class="intro">
-    <h1>Scanning the IPv6 Internet using Subnet-Router Anycast Probing</h1>
-
+    <h1>IPv6 Subnet-Router anycast dataset: Router IPv6 addresses</h1>
+    <p>
+        This page presents detailed results on the router IPv6 addresses discovered using Subnet-Router anycast (SRA) probing.
+        We provide a historical development plot, geographic distributions of router IPv6 addresses, and a network type distribution.
+    </p>
 </section>
 
 <section class="tiles">
     <div class="tile tile-plot-full">
-        <h2>Overview of Measurements</h2>
+        <h2>Router IPv6 addresses</h2>
+        <p>This graph shows the development of active IPv6 router addresses observed with SRA probing over time.</p>
         <iframe
             class="plot-embed"
             src="{{ url_for('static', filename='data/figures/scan_overview_plot.html') }}"
@@ -20,7 +24,8 @@
     </div>
 
     <div class="tile tile-plot-full">
-        <h2>World Map of IPv6 Router IP Addresses Observed with SRA Probing</h2>
+        <h2>Global distribution of router IPv6 addresses observed with SRA probing</h2>
+        <p>This world-map shows the geographic distribution of active IPv6 router addresses per country.</p>
         <iframe
             class="plot-embed"
             src="{{ url_for('static', filename='data/figures/worldmap-sra-ips.html') }}"
@@ -30,7 +35,8 @@
         ></iframe>
     </div>
     <div class="tile tile-plot-full">
-        <h2>Comparison of Network Types across multiple IPv6 Address Data Sources</h2>
+        <h2>Comparison of network types across multiple IPv6 address data sources</h2>
+        <p>This heatmap shows the distribution of IPv6 addresses belonging to a specific network type (e.g., ISPs, CDNs, etc.) for multiple IPv6 address data sets, including our SRA results.</p>
         <iframe
             class="plot-embed"
             src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.html') }}"
@@ -40,16 +46,18 @@
         ></iframe>
     </div>
     <div class="tile tile-plot-full">
-        <h2>SRA Candidate Set Generation Pipeline</h2>
+        <h2>SRA candidate set generation pipeline</h2>
+        <p>This diagram illustrates the process to generate target IPv6 addresses for scanning.
+            We use (i) the TU Munich hitlist addresses they use for scanning and derive all unique /64 networks, and (ii) all /48 BGP announcements for which we then generate all possible /64 subnets.</p>
         <img src="{{ url_for('static', filename='img/sra-scanning-pipeline.svg') }}" alt="SRA Scanning Pipeline">
     </div>
     <div class="tile tile-plot-full">
-        <h2>Generation of Subnet-Router Anycast Addresses</h2>
+        <h2>Generation of Subnet-Router anycast addresses</h2>
+        <p>This diagram illustrates how we generate the Subnet-Router anycast (SRA) address for a given IPv6 subnet.
+            The SRA address is formed by setting the interface identifier to the fixed value of ::0 within the subnet, we then iterate over all possible /64 subnets and derive the SRA address for each.</p>
         <img src="{{ url_for('static', filename='img/sra-address-generation.svg') }}" alt="SRA Address Generation">
     </div>
-    <div class="tile-row tile-row">
-        <h2>Results of Subnet-Router Anycast Scans</h2>
-    </div>  
+ 
      <div class="tile-row tile-row">
         <div class="artifact-tile artifact-tile-horizontal">
             <div class="artifact-icon" aria-hidden="true">

@@ -778,6 +778,10 @@ body p {
     border-top: 4px solid var(--tu-blue);
 }
 
+.artifact-tile-full {
+    grid-column: 1 / -1;
+}
+
 .artifact-tile-horizontal {
     display: flex;
     align-items: center;
