@@ -50,28 +50,32 @@
     </div>
     <div class="tile tile-plot-full">
         <h2>SRA candidate set generation pipeline</h2>
-        <p>This diagram illustrates the process to generate target IPv6 addresses for scanning.
-            We use (i) the TU Munich hitlist addresses they use for scanning and derive all unique /64 networks, and (ii) all /48 BGP announcements for which we then generate all possible /64 subnets.</p>
+        <p>This diagram illustrates the process to generate target IPv6 addresses for SRA scanning.
+            We base the generation of target addresses on two external data sources, the TU Munich hitlist and public RouteViews BGP dumps.
+        </p>
+        <p>
+            For each hitlist address, we derive the /64 network.
+            
+            For each entry in the BGP table dump, we consider all /48 prefixes further to generate all possible /64 SRA addresses.
+        </p>
         <img src="{{ url_for('static', filename='img/sra-scanning-pipeline.svg') }}" alt="SRA Scanning Pipeline">
     </div>
     <div class="tile tile-plot-full">
         <h2>Generation of Subnet-Router anycast addresses</h2>
-        <p>This diagram illustrates how we generate the Subnet-Router anycast (SRA) address for a given IPv6 subnet.
-            The SRA address is formed by setting the interface identifier to the fixed value of ::0 within the subnet, we then iterate over all possible /64 subnets and derive the SRA address for each.</p>
-            More details in our paper.
+        <p>This diagram illustrates how we generate the Subnet-Router anycast (SRA) addresses for a given IPv6 subnet.
+            For the given input prefixes, we generate all possible /64 subnets.
+            Then, for each subnet, we derive the SRA address by setting the interface identifier to the fixed value of ::0.
+            </p>
+            
         <img src="{{ url_for('static', filename='img/sra-address-generation.svg') }}" alt="SRA Address Generation">
     </div>
- 
-     <div class="tile-row tile-row">
-        <div class="artifact-tile artifact-tile-horizontal">
-            <div class="artifact-icon" aria-hidden="true">
-                <img src="{{ url_for('static', filename='img/red-signal-light.svg') }}" alt="">
-            </div>
-            <div class="artifact-content">
-                <h2 class="heading-centered">We analyze known issues in IPv6: Routing loops and amplification.</h2>
+
+     <div class="tile tile-plot-full">
+                <h2>More details on the method</h2>
                 <div class="hitlist-action-group">
-                    <a class="hitlist-download" href="{{ url_for('routingloops') }}">
-                        Explore
+                    <a href="https://doi.org/10.1145/3768997"
+                       target="_blank" rel="noopener">
+                        Download our paper
                     </a>
                 </div>
             </div>
