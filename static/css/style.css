@@ -138,7 +138,14 @@ body p {
     width: min(1200px, calc(100%-4rem));
     margin: 0 auto;
 }
-
+.footer-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    width: min(1200px, calc(100%-4rem));
+    margin: 0 auto;
+}
 .tile {
     background: white;
     border-top: 4px solid var(--tu-blue);
@@ -508,7 +515,7 @@ body p {
 .plot-metric-grid {
     margin-top: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
 }
 
@@ -526,7 +533,7 @@ body p {
 
 .as-checker {
     margin-top: 2rem;
-    border-top: 2px solid rgba(0, 84, 159, 0.1);
+    /**border-top: 2px solid rgba(0, 84, 159, 0.1);**/
     padding-top: 1.5rem;
 }
 
@@ -563,6 +570,7 @@ body p {
     color: var(--tu-blue);
     font-weight: 600;
     cursor: pointer;
+    font-size: 16px;
     transition: background 0.2s ease, color 0.2s ease;
 }
 

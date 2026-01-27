@@ -31,7 +31,29 @@
 
 <main>
     {% block content %}{% endblock %}
+    <section class="footer-tiles">
+    <div class="tile-row tile-row">
+            <div class="tile logo-tile">
+                <h3>Powered by</h3>
+                <div class="logo-grid">
+                    <img src="{{ url_for('static', filename='img/logos/tud-logo-long.svg') }}" alt="TU Dresden logo">
+                    <img src="{{ url_for('static', filename='img/logos/haw-logo.png') }}" alt="HAW Hamburg logo">
+                    <img src="{{ url_for('static', filename='img/logos/bmftr-funding.png') }}" alt="BMFTR funded by logo">
+                </div>
+                <h3>External data providers</h3>
+                <div class="logo-grid">
+                    <img class="logo-small" src="{{ url_for('static', filename='img/logos/tum-logo.png') }}" alt="TU Munich logo">
+                    <img class="logo-medium" src="{{ url_for('static', filename='img/logos/external/routeviews.svg') }}" alt="Routeviews logo">
+                    <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/ripeatlas.svg') }}" alt="RIPE Atlas logo">
+                    <img class="logo-medium" src="{{ url_for('static', filename='img/logos/external/caida.png') }}" alt="CAIDA logo">
+                    <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/maxmind-logo.svg') }}" alt="Maxmind logo">
+                    <img class="logo-small" src="{{ url_for('static', filename='img/logos/external/ipinfo.svg') }}" alt="IPinfo logo">
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
+
 
 <footer class="site-footer">
     <p>
