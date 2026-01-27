@@ -78,9 +78,9 @@
             <div class="metric-hitlist-content">
                 <div class="metric-hitlist-info">
                     <h2 class="metric-value" data-target="{{ metrics.router_ips }}">{{ metrics.router_ips|si }}</h2>
-                    <p>Observed router IPv6 addresses with subnet-router anycast probing</p>
+                    <p>Observed router IPv6 addresses using subnet-router anycast probing</p>
                     <h2 class="metric-value" data-target="{{ metrics.total_asn }}">{{ metrics.total_asn|si }}</h2>
-                    <p>Autonomous systems covered by the found router IPv6 addresses</p>
+                    <p>Autonomous systems connect routers from the SRA datasets</p>
                     <h3 data-target="{{ metrics.last_scan_date }}">Last scan: {{ metrics.last_scan_date }}</h3>
                 </div>
                 <div class="metric-hitlist-overlap">
@@ -94,7 +94,7 @@
                             </text>
                         </svg>
                     </div>
-                    <p>Router IPv6 addresses not observed in the comparison data sources</p>
+                    <p>Additional IPv6 router addresses compared to other data sources</p>
                 </div>
             </div>
             <div class="hitlist-action-group">
@@ -117,7 +117,9 @@
         {% for source in overlap_sources %}
         <div class="tile overlap-tile">
             <h2>{{ source.title }}</h2>
-            <h3 data-target="{{ metrics[source.date_key] }}">Last comparison: {{ metrics[source.date_key] }}</h3>
+            <h3 data-target="{{ metrics[source.date_key] }}">
+                Latest dataset from: {{ metrics[source.date_key] }} 
+                SRA dataset from: {{ metrics.last_scan_date }}</h3>
             {{ overlap_section("IPv6 Addresses", source.total_addr_key, source.overlap_addr_pct_key, source.overlap_addr_abs_key) }}
             {{ overlap_section("Autonomous Systems", source.total_asn_key, source.overlap_asn_pct_key, source.overlap_asn_abs_key) }}
             <hr class="hr-long-topmargin">
@@ -129,7 +131,20 @@
         </div>
         {% endfor %}
     </div>
-    
+    <div class="tile-row tile-row">
+        <div class="artifact-tile artifact-tile-horizontal">
+            <div class="artifact-icon" aria-hidden="true">
+                <img src="{{ url_for('static', filename='img/red-signal-light.svg') }}" alt="">
+            </div>
+            <div class="artifact-content">
+                <h2 class="heading-centered">We analyze known issues in IPv6: Routing loops and amplification.</h2>
+                <div class="hitlist-action-group">
+                    <a class="hitlist-download" href="{{ url_for('routingloops') }}">
+                        Explore
+                    </a>
+                </div>
+            </div>
+        </div>
     <div class="tile tile-reference">
         <h2>If you use our data, please use the following reference:</h2>
         {% for ref in references %}

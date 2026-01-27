@@ -3,16 +3,19 @@
 {% block content %}
 
 <section class="intro">
-    <h1>IPv6 Subnet-Router anycast dataset: Router IPv6 addresses</h1>
+    <h1>IPv6 Subnet-Router anycast dataset: IPv6 router addresses</h1>
     <p>
-        This page presents detailed results on the router IPv6 addresses discovered using Subnet-Router anycast (SRA) probing.
-        We provide a historical development plot, geographic distributions of router IPv6 addresses, and a network type distribution.
+        This page presents details of the IPv6 router addresses discovered using Subnet-Router anycast (SRA) probing.
+        We provide insights into changes over time, geographic distribution of IPv6 router addresses, and the types of networks connecting these router addresses.
+    </p>
+    <p>
+        We also provide background on our measurement method.
     </p>
 </section>
 
 <section class="tiles">
     <div class="tile tile-plot-full">
-        <h2>Router IPv6 addresses</h2>
+        <h2>IPv6 router addresses</h2>
         <p>This graph shows the development of active IPv6 router addresses observed with SRA probing over time.</p>
         <iframe
             class="plot-embed"
@@ -24,7 +27,7 @@
     </div>
 
     <div class="tile tile-plot-full">
-        <h2>Global distribution of router IPv6 addresses observed with SRA probing</h2>
+        <h2>Global distribution of IPv6 router addresses observed with SRA probing</h2>
         <p>This world-map shows the geographic distribution of active IPv6 router addresses per country.</p>
         <iframe
             class="plot-embed"
@@ -35,8 +38,8 @@
         ></iframe>
     </div>
     <div class="tile tile-plot-full">
-        <h2>Comparison of network types across multiple IPv6 address data sources</h2>
-        <p>This heatmap shows the distribution of IPv6 addresses belonging to a specific network type (e.g., ISPs, CDNs, etc.) for multiple IPv6 address data sets, including our SRA results.</p>
+        <h2>Comparison of network types across IPv6 address data sources</h2>
+        <p>This heatmap shows the distribution of IPv6 addresses belonging to a specific network type (e.g., ISPs, CDNs) for multiple IPv6 address data sets, including our SRA results.</p>
         <iframe
             class="plot-embed"
             src="{{ url_for('static', filename='data/figures/heatmap-network-types-all-sources.html') }}"
@@ -55,6 +58,7 @@
         <h2>Generation of Subnet-Router anycast addresses</h2>
         <p>This diagram illustrates how we generate the Subnet-Router anycast (SRA) address for a given IPv6 subnet.
             The SRA address is formed by setting the interface identifier to the fixed value of ::0 within the subnet, we then iterate over all possible /64 subnets and derive the SRA address for each.</p>
+            More details in our paper.
         <img src="{{ url_for('static', filename='img/sra-address-generation.svg') }}" alt="SRA Address Generation">
     </div>
  
