@@ -54,6 +54,30 @@
         </div>
     </div>
     <div class="tile tile-plot-full">
+        <h2>Global distribution of IPv6 routing loops</h2>
+        <p>This world-map shows the geographic distribution of IPv6 routing loops with aggregated information on the number of affected ASes, IPv6 router addresses, looping, and amplifying subnets.
+            The color is based on the number of looping subnets per country.
+        </p>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/worldmap-routing-loops.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
+    </div>
+    <div class="tile tile-plot-full">
+        <h2>Global status of amplification factors</h2>
+        <p>This world-map shows countries not affected by the amplification bug (gray), as well as countries that show low amplification factors (yellow) or critical amplification factors >10 (red).</p>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/worldmap-amplification.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="520"
+        ></iframe>
+    </div>
+    <div class="tile tile-plot-full">
         <h2>Problem: Missing NULL routes in combination with default routes can lead to routing loops</h2>
         <p>
             Routing loops can emerge when a provider assigns provider aggregated (PA) address space to a customer, and this customer uses default routing
