@@ -17,16 +17,21 @@
         <p>
             The following plots and metrics summarize our findings on routing loops and amplification in IPv6 networks.
         </p>
-        <div class="plot-row">
-            <figure>
-                <img src="{{ url_for('static', filename='data/figures/looping-subnets-per-router-rank.png') }}" alt="Looping subnets per router rank plot">
-                <figcaption>Number of /64 subnets per router IP address that trigger a routing loop.</figcaption>
-            </figure>
-            <figure>
-                <img src="{{ url_for('static', filename='data/figures/amplification-routingloops.png') }}" alt="Amplification vs routing loops plot">
-                <figcaption>Maximum amplification per router IP address.</figcaption>
-            </figure>
-        </div>
+        <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/loop_overview_plot.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="400"
+        ></iframe>
+        <p></p>
+            <iframe
+            class="plot-embed"
+            src="{{ url_for('static', filename='data/figures/looping_subnets_per_router.html') }}"
+            title="World map of SRA IPv6 addresses"
+            loading="lazy"
+            height="400"
+        ></iframe>
         <div class="plot-metric-grid">
             <div class="plot-metric">
                 <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
