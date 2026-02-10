@@ -13,6 +13,45 @@
 
 <section class="tiles">    
     <div class="tile tile-plot-full">
+        <h2>Number of /64 subnets and ASes affected by routing loops and amplification</h2>
+        <div class="plot-metric-grid">
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
+                <p>/64 subnets that trigger routing loops</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
+                <p>/64 subnets that trigger amplification</p>
+            </div>
+        </div>
+        <div class="plot-metric-grid">
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.looping_ases }}">{{ metrics.looping_ases|si }}</h3>
+                <p>ASes affected by routing loops</p>
+            </div>
+            <div class="plot-metric">
+                <h3 class="metric-value" data-target="{{ metrics.amplifying_ases }}">{{ metrics.amplifying_ases|si }}</h3>
+                <p>ASes affected by amplification</p>
+            </div>
+        </div>
+    </div>
+    <div class="tile tile-plot-full">
+        <h2>Check if your network is affected</h2>
+         <div class="as-checker">
+            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
+                <h3>Your AS number:</h3>
+                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
+                <button type="submit" class="as-checker-submit">Submit</button>
+            </form>
+            <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">
+                {% if as_result %}
+                    {{ as_result.message }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="tile tile-plot-full">
         <h2>Routing loops and amplification in IPv6</h2>
         <p>
             The following plots and metrics summarize our findings on routing loops and amplification in IPv6 networks.
@@ -32,32 +71,8 @@
             loading="lazy"
             height="400"
         ></iframe>
-        <div class="plot-metric-grid">
-            <div class="plot-metric">
-                <h3 class="metric-value" data-target="{{ metrics.looping_subnets }}">{{ metrics.looping_subnets|si }}</h3>
-                <p>/64 subnets that trigger routing loops</p>
-            </div>
-            <div class="plot-metric">
-                <h3 class="metric-value" data-target="{{ metrics.amplifying_subnets }}">{{ metrics.amplifying_subnets|si }}</h3>
-                <p>/64 subnets that trigger amplification</p>
-            </div>
-        </div>
     </div>
-    <div class="tile tile-plot-full">
-        <h2>Check if your network is affected</h2>
-         <div class="as-checker">
-            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
-                <h3>Your AS number:</h3>
-                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
-                <button type="submit" class="as-checker-submit">Submit</button>
-            </form>
-            <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">
-                {% if as_result %}
-                    {{ as_result.message }}
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    
     <div class="tile tile-plot-full">
         <h2>Global distribution of IPv6 routing loops</h2>
         <p>This world-map shows the geographic distribution of IPv6 routing loops with aggregated information on the number of affected ASes, IPv6 router addresses, looping, and amplifying subnets.

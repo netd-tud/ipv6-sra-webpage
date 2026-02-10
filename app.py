@@ -99,6 +99,8 @@ def load_metrics():
         "looping_subnets": "looping-subnets",
         "amplifying_subnets": "amplifying-subnets",
         "max_amplification": "max-amplification",
+        "looping_ases": "asn-looping",
+        "amplifying_ases": "asn-amplifying",
     }
     for metric_key, column in column_map.items():
         value = latest.get(column)
@@ -219,4 +221,5 @@ def measurement_results():
     return render_template("measurement-results.html")
 
 if __name__ == "__main__":
+    #app.run(debug=True)
     app.run(debug=False)
