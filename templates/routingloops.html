@@ -5,8 +5,8 @@
     <h1>IPv6 Subnet-Router anycast dataset: Routing loops</h1>
     <p>
         This page presents details on IPv6 routing loops and amplification of looping packets.
-        We provide plots on the number of looping /64 subnets per router IP address, amplification factors, 
-        and an explanation of the emergence of routing loops as well as guidance to fix routing loops.
+        We provide plots on the number of looping /64 subnets per router IP address, <a href="#amplification-factors">amplification factors</a>,
+        and an explanation of the <a href="#emergence">emergence of routing loops</a> as well as <a href="#guidance">guidance to fix routing loops</a>.
         You can check whether your network is affected.
     </p>
 </section>
@@ -80,25 +80,25 @@
         </p>
         <iframe
             class="plot-embed"
-            src="{{ url_for('static', filename='data/figures/worldmap-routing-loops.html') }}"
+            src="{{ url_for('static', filename='data/figures/world_map_routing_loops.html') }}"
             title="World map of SRA IPv6 addresses"
             loading="lazy"
             height="520"
         ></iframe>
     </div>
     <div class="tile tile-plot-full">
-        <h2>Global status of amplification factors</h2>
+        <h2 id="amplification-factors">Global status of amplification factors</h2>
         <p>This world-map shows countries not affected by the amplification bug (gray), as well as countries that show low amplification factors (yellow) or critical amplification factors >10 (red).</p>
         <iframe
             class="plot-embed"
-            src="{{ url_for('static', filename='data/figures/worldmap-amplification.html') }}"
+            src="{{ url_for('static', filename='data/figures/world_map_amplification.html') }}"
             title="World map of SRA IPv6 addresses"
             loading="lazy"
             height="520"
         ></iframe>
     </div>
     <div class="tile tile-plot-full">
-        <h2>Problem: Missing NULL routes in combination with default routes can lead to routing loops</h2>
+        <h2 id="emergence">Problem: Missing NULL routes in combination with default routes can lead to routing loops</h2>
         <p>
             Routing loops can emerge when a provider assigns provider aggregated (PA) address space to a customer, and this customer uses default routing
             and only parts of the address space without configuring NULL routes for the unused subnets. 
@@ -106,7 +106,7 @@
         <img src="{{ url_for('static', filename='img/routingloops-figure.svg') }}" alt="Overview of routing loop emergence.">
     </div>    
     <div class="tile tile-plot-full">
-        <h2>Solution: Set NULL routes to prevent routing loops!</h2>
+        <h2 id="guidance">Solution: Set NULL routes to prevent routing loops!</h2>
         <p>
             To prevent routing loops, it is advised to set NULL routes for all unused subnets of the assigned address space, if you deploy default routes.
         </p>
