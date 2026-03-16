@@ -96,6 +96,19 @@
                     </div>
                     <p>Additional IPv6 router addresses compared to other data sources</p>
                 </div>
+                 <div class="metric-hitlist-overlap">
+                    <div class="overlap-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="overlap-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="overlap-progress" cx="60" cy="60" r="52" data-percentage="{{ metrics.ping_success_percentage }}"></circle>
+                            <text x="62" y="58" text-anchor="middle">
+                                <tspan class="overlap-percentage metric-value metric-percentage" data-target="{{ metrics.ping_success_percentage }}">{{ '{:.2f}%'.format(metrics.ping_success_percentage) }}</tspan>
+                                <tspan x="60" dy="26" class="overlap-value metric-value" data-target="{{ metrics.ping_success_absolute }}">{{ metrics.ping_success_absolute|si }}</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                    <p>IPv6 router addresses replying to a direct ICMP Echo request (ping)</p>
+                </div>
             </div>
             <div class="hitlist-action-group">
                 <a class="hitlist-download" href="{{ url_for('static', filename='data/router-hitlist.csv.zst') }}" download>
@@ -112,6 +125,22 @@
                     </svg>
                     SRA IPv6 router addresses (.parquet)
                 </a>
+            </div>
+            <div class="schema-panels">
+                <div class="schema-panel">
+                    <div class="schema-panel-header"> Column schema for .csv.zst</div>
+                    <pre class="schema-code"><span class="schema-comment"># IPv6 router addresses, scanned on YYYY-MM-DD</span>
+<span class="schema-col-name">router_address</span>  <span class="schema-col-type">string</span>
+<span class="schema-col-name">ping_success</span>    <span class="schema-col-type">bool</span></pre>
+                </div>
+                <div class="schema-panel">
+                    <div class="schema-panel-header"> Column schema for .parquet</div>
+                    <pre class="schema-code">
+<span class="schema-col-name">router_address</span>  <span class="schema-col-type">string</span>
+<span class="schema-col-name">ping_success</span>    <span class="schema-col-type">bool</span>
+<span class="schema-col-name">scan_date</span>       <span class="schema-col-type">date</span>
+                    </pre>
+                </div>
             </div>
         </div>
     </div>

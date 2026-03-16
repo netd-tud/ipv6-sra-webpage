@@ -39,6 +39,8 @@ DEFAULT_METRICS = {
     "overlap_ripe_absolute": 0,
     "overlap_ripe_percentage": 0,
     "total_ripe": 0,
+    "ping_success_absolute": 0,
+    "ping_success_percentage": 0,
 }
 
 def load_references():
@@ -101,6 +103,8 @@ def load_metrics():
         "max_amplification": "max-amplification",
         "looping_ases": "asn-looping",
         "amplifying_ases": "asn-amplifying",
+        "ping_success_absolute": "ping-success",
+        "ping_success_percentage": "ping-success-share",
     }
     for metric_key, column in column_map.items():
         value = latest.get(column)

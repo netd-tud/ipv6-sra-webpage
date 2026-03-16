@@ -260,6 +260,53 @@ body p {
     color: #fff;
 }
 
+.schema-panels {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.schema-panel {
+    flex: 1;
+    background: #eff1f5;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.schema-panel-header {
+    background: var(--tu-blue);
+    color: #fff;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    letter-spacing: 0.03em;
+}
+
+.schema-code {
+    margin: 0;
+    padding: 0.75rem;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    overflow-x: auto;
+    font-family: monospace;
+}
+
+.schema-comment {
+    color: #7a8694;
+    font-style: italic;
+}
+
+.schema-col-name {
+    color: var(--tu-blue);
+    font-weight: 700;
+}
+
+.schema-col-type {
+    color: #888;
+}
+
 .overlap-tile {
     display: flex;
     flex-direction: column;
