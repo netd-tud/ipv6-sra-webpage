@@ -1,4 +1,5 @@
 **/router-hitlist.csv.zst
+**/router-hitlist.parquet
 **/affected-ases.csv
 **/.venv/
 **/__pycache__/
