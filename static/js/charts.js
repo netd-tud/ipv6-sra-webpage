@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (asForm) {
     const asInput = document.getElementById("asn-input");
     const resultBox = document.getElementById("as-checker-result");
-    const resultDelayMs = 1000;
+    const resultDelayMs = 400;
 
     const resetResult = () => {
       if (!resultBox) return;
