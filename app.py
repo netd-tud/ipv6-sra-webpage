@@ -191,7 +191,7 @@ def check_as():
 def artifacts():
     return render_template("artifacts.html")
 
-@app.route("/routingloops")
+@app.route("/routingloops", methods=["GET", "POST"])
 def routingloops():
     metrics = load_metrics()
     references = load_references()

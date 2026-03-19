@@ -639,6 +639,27 @@ body p {
     display: flex;
 }
 
+.as-checker-result.loading {
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.as-checker-spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(47, 87, 178, 0.25);
+    border-top-color: var(--tu-blue);
+    animation: asCheckerSpin 0.9s linear infinite;
+    flex: 0 0 auto;
+}
+
+@keyframes asCheckerSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .as-checker-result.affected {
     background: #ffe1e1;
     border: 2px solid #cc1f1f;

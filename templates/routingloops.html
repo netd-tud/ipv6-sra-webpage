@@ -38,9 +38,9 @@
     <div class="tile tile-plot-full">
         <h2>Check if your network is affected</h2>
          <div class="as-checker">
-            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('index') }}" method="post">
+            <form id="as-checker-form" class="as-checker-form" action="{{ url_for('routingloops') }}" method="post">
                 <h3>Your AS number:</h3>
-                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required value="{{ submitted_asn }}">
+                <input id="asn-input" name="asn" type="number" min="0" step="1" placeholder="e.g., 3320" required autocomplete="off">
                 <button type="submit" class="as-checker-submit">Submit</button>
             </form>
             <div id="as-checker-result" class="as-checker-result{% if as_result %} visible {{ as_result.state }}{% endif %}" role="status" aria-live="polite">

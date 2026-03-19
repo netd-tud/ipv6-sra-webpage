@@ -94,25 +94,56 @@ document.addEventListener("DOMContentLoaded", () => {
   if (asForm) {
     const asInput = document.getElementById("asn-input");
     const resultBox = document.getElementById("as-checker-result");
+    const resultDelayMs = 1000;
+
+    const resetResult = () => {
+      if (!resultBox) return;
+      resultBox.textContent = "";
+      resultBox.classList.remove("visible", "affected", "safe", "error", "loading");
+    };
+
+    const showLoading = () => {
+      if (!resultBox) return;
+      resultBox.classList.remove("affected", "safe", "error");
+      resultBox.classList.add("visible", "loading");
+      resultBox.innerHTML = '<span class="as-checker-spinner" aria-hidden="true"></span><span>Checking AS number...</span>';
+    };
 
     const showResult = (message, state) => {
       if (!resultBox) return;
+      resultBox.classList.remove("loading");
       resultBox.textContent = message;
       resultBox.classList.add("visible");
       resultBox.classList.toggle("affected", state === "affected");
       resultBox.classList.toggle("safe", state === "safe");
-      if (state === "error") {
-        resultBox.classList.remove("affected", "safe");
-      }
+      resultBox.classList.toggle("error", state === "error");
     };
+
+    // Ensure browser restore/autofill does not keep a stale AS number after reload.
+    if (asInput) {
+      asInput.value = "";
+    }
+    resetResult();
 
     asForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const value = asInput?.value.trim() ?? "";
+      resetResult();
+      showLoading();
+
+      const loadingStarted = Date.now();
+      const revealWithDelay = (message, state) => {
+        const remaining = Math.max(0, resultDelayMs - (Date.now() - loadingStarted));
+        window.setTimeout(() => {
+          showResult(message, state);
+        }, remaining);
+      };
+
       if (!/^\d+$/.test(value)) {
-        showResult("Please enter a valid AS number.", "error");
+        revealWithDelay("Please enter a valid AS number.", "error");
         return;
       }
+
       fetch("/check_as", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -124,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then((data) => {
           if (data.affected) {
-            showResult("Your AS is affected by routing loops!", "affected");
+            revealWithDelay(`AS${data.asn}: Your AS is affected by routing loops!`, "affected");
           } else {
-            showResult("Your AS is not affected!", "safe");
+            revealWithDelay(`AS${data.asn}: Your AS is not affected!`, "safe");
           }
         })
         .catch(() => {
-          showResult("Unable to check the AS right now. Please try again later.", "error");
+          revealWithDelay("Unable to check the AS right now. Please try again later.", "error");
         });
     });
   }
