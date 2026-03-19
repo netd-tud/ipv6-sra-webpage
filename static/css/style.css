@@ -135,7 +135,7 @@ body p {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     padding: 0 2rem;
-    width: min(1200px, calc(100%-4rem));
+    width: min(1200px, calc(100% - 4rem));
     margin: 0 auto;
 }
 .footer-tiles {
@@ -143,9 +143,14 @@ body p {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     padding: 1.5rem 2rem;
-    width: min(1200px, calc(100%-4rem));
+    width: min(1200px, calc(100% - 4rem));
     margin: 0 auto;
 }
+
+.legal-page.single-tile {
+    padding: 0 2rem;
+}
+
 .tile {
     background: white;
     border-top: 4px solid var(--tu-blue);
@@ -838,7 +843,7 @@ body p {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
-    padding: 0 2rem 3rem;
+    padding: 0 2rem;
 }
 
 @media (max-width: 800px) {
